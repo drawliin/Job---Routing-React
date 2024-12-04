@@ -1,25 +1,42 @@
-import {BrowserRouter, Routes, Route, NavLink} from 'react-router-dom'
+import React from 'react'
+import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
+import Navbar from './pages/Navbar'
+import OrderSummary from './pages/OrderSummary'
+import NoMatch from './pages/NoMatch'
+import Products from './pages/Products'
+import FeaturedP from './pages/FeaturedP'
+import NewP from './pages/NewP'
+import Users from './pages/Users'
+import UserDetails from './pages/UserDetails'
+import Profile from './pages/Profile'
 
 function App() {
   return (
-    <BrowserRouter>
+        <>
+          <Navbar/>
 
-      <header>
-        <nav>
-          <h1>JobRouter</h1>
-          <NavLink to='/'>Home</NavLink>
-          <NavLink to='/about'>About</NavLink>
-        </nav>
-      </header>
-      <main>
-        <Routes>
-          <Route index element={<Home/>} />
-          <Route path='/about' element={<About/>} />
-        </Routes>
-      </main>
-    </BrowserRouter>
+          <Routes>
+              <Route index element={<Home/>} />
+              <Route path='/about' element={<About/>} />
+              <Route path='/ordersummary' element={<OrderSummary/>} />
+
+              <Route path='/products' element={<Products/>}>
+                <Route index element={<FeaturedP/>}/>
+                <Route path='featured' element={<FeaturedP/>}/>
+                <Route path='new' element={<NewP/>}/>
+              </Route>
+
+              <Route path='/profile' element={<Profile/>}/>
+
+              <Route path='/users' element={<Users/>}>
+                <Route path=':userId' element={<UserDetails/>}/>
+              </Route>
+
+              <Route path="*" element={<NoMatch/>} />   
+          </Routes>
+        </>  
   );
 }
 
