@@ -11,10 +11,13 @@ import NewP from './pages/NewP'
 import Users from './pages/Users'
 import UserDetails from './pages/UserDetails'
 import Profile from './pages/Profile'
+import {AuthProvider} from './pages/auth'
+import Login from './pages/Login'
+import { RequireAuth } from './pages/RequireAuth'
 
 function App() {
   return (
-        <>
+        <AuthProvider>
           <Navbar/>
 
           <Routes>
@@ -28,7 +31,8 @@ function App() {
                 <Route path='new' element={<NewP/>}/>
               </Route>
 
-              <Route path='/profile' element={<Profile/>}/>
+              <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
+              <Route path='/login' element={<Login/>}/>
 
               <Route path='/users' element={<Users/>}>
                 <Route path=':userId' element={<UserDetails/>}/>
@@ -36,7 +40,7 @@ function App() {
 
               <Route path="*" element={<NoMatch/>} />   
           </Routes>
-        </>  
+        </AuthProvider>  
   );
 }
 
